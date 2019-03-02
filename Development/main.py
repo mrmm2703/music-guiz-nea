@@ -36,8 +36,8 @@ while(True):
 		print("Incorrect password. Try again.")
 
 # Open CSV file and load into list 'songDB'
-file = open("database.csv", "rt")
-fileReader = csv.reader(file)
+SongFile = open("database.csv", "rt")
+fileReader = csv.reader(SongFile)
 songDB = []
 
 # Put records from database into list
