@@ -57,5 +57,4 @@ with open("database.csv", mode="wb") as csvFile:
 
 print("Finished creating database of songs.")
 print("")
-print("Press enter key to continue...")
-input("")
+raw_input("Press enter key to continue...")
