@@ -25,9 +25,11 @@ print str(songCount) + " songs in total."
 numberOfIterations = math.ceil(float(songCount) / 100)
 print("")
 
+print playlist_response.body()
+
 # Open the database
 print("Writing songs into database...")
-with open("database.csv", mode="wb") as csvFile:
+with open("database1.csv", mode="wb") as csvFile:
     writer = csv.writer(csvFile, delimiter=",", quotechar='"', quoting=csv.QUOTE_ALL)
     offset = 0
     while(True):
