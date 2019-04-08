@@ -12,34 +12,31 @@ password = "ele"
 def hasNumbers(inputString):
 	return any(char.isdigit() for char in inputString)
 
-def endGame():
+def endGame(points):
 	scoreboard = []
-	points = []
+	# Write score to scoreboard
 	with open("scoreboard.csv", "ab") as scoreboardFile:
-		scoreboardWriter = csv.writer(scoreboardFile, delimiter=",", quotechar='"', quoting=csv.QUOTE_ALL)
-		scoreboardWriter.writerow([str(name), str(points)])
-	with open("scoreboard.csv", "rt") as scoreboardFile:
-		scoreboardReader = csv.reader(scoreboardFile)
-		for i in scoreboardReader:
-			scoreboard.append([i[0], int(i[1])])
-			points.append(int(i[1]))
-		print scoreboard
-		print(sorted(scoreboard, key = lambda x: x[1]))
-	points = points.sort(reverse=True)
-	points = list(set(points))
-	position = 1
-	for x in points:
-		if x < position:
-			position = position + 1
-		else:
-			break
+		scoreboardWriter = csv.writer(scoreboardFile)
+		scoreboardWriter.writerow([name, points])
+	# Open scoreboard in read mode and store in memory
+	scoreboardFile = open("scoreboard.csv", "rt")
+	scoreboardReader = csv.reader(scoreboardFile)
+	for i in scoreboardReader:
+		scoreboard.append([i[0], int(i[1])])
 	print("Game over!")
 	print("Well done " + str(name) + ", you got " + str(points) + " points.")
-	print("You're number " + str(position) + " in the leaderboard based purely off score!")
 	print("")
 	print("Top 5:")
-	for score in scoreboard:
+	# Sort list
+	scoreboardSorted = sorted(scoreboard, key = lambda x: x[1])
+	scoreboardSorted.reverse()
+	# Print first 5
+	i = 1
+	for score in scoreboardSorted:
 		print(str(score[0]) + ": " + str(score[1]) + " points")
+		i = i + 1
+		if i == 5:
+			break
 	sys.exit()
 
 # Function to turn song name into usable string
@@ -123,6 +120,6 @@ while(True):
 			print("Incorrect answer.")
 			tries = tries + 1
 			if(tries > 2):
-				endGame()
+				endGame(points)
 			else:
 				pass
